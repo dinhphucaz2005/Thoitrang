@@ -53,6 +53,7 @@ public class GiayFragment extends Fragment {
     ImageView img_anh, img_search;
     Button btnSave, btnCanl;
 
+
     static GiayDAO dao;
     GiayAdapter adapter;
     Giay item;

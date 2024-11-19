@@ -83,9 +83,7 @@ public class GiayAdapter extends ArrayAdapter<Giay> {
             }
         });
 
-//        if (position % 2 == 0){
-//
-//        }
+
 
         return v;
 

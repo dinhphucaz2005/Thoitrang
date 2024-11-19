@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".LoginActivity"
+    android:background="#E8E3E3"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -63,7 +64,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:endIconMode="password_toggle"
-
             app:counterEnabled="true"
             app:boxCornerRadiusTopStart="10dp"
             app:boxCornerRadiusBottomEnd="10dp"
