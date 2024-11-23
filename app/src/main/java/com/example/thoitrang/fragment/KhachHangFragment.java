@@ -51,7 +51,7 @@ KhachHang item;
         dao = new KhachHangDAO(getActivity());
         capNhatLv();
 
-//        tim kiem Khach hang theo hoTen Khach hang
+//        tim kiem Khach hang theo hoTen Khach
         img_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
