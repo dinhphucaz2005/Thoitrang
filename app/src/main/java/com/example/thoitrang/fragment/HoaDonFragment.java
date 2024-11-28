@@ -55,6 +55,7 @@ public class HoaDonFragment extends Fragment {
 
     static HoaDonDAO dao;
     HoaDonAdapter adapter;
+
     HoaDon item;
 
 

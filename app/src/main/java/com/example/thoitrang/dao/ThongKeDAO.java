@@ -21,6 +21,7 @@ public class ThongKeDAO {
         this.context = context;
         DbHelper dbHelper = new DbHelper(context);
         db = dbHelper.getWritableDatabase();
+
     }
 
 //    thong ke TOP5

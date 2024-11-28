@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.thoitrang">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/florentino"
         android:allowBackup="true"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Assignmet_Thangnvph13623">
+        android:theme="@style/Theme.nhom8.dev">
+
         <activity android:name="com.example.thoitrang.LoginActivity" />
         <activity android:name="com.example.thoitrang.SplashScreenActivity">
             <intent-filter>

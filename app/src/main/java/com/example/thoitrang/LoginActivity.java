@@ -43,6 +43,7 @@ NhanVienDAO dao;
 
     }
     public void checkLogin(){
+
         strUser = edUserName.getText().toString();
         strPass = edPassword.getText().toString();
         if(strUser.isEmpty()||strPass.isEmpty()){

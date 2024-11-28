@@ -33,6 +33,7 @@ public class DoanhThuFragment extends Fragment {
         View v =  inflater.inflate(R.layout.fragment_doanhthu, container, false);
         edTuNgay = v.findViewById(R.id.edtuNgay_DT);
         edDenNgay = v.findViewById(R.id.eddenNgay_DT);
+
         tvDoanhThu = v.findViewById(R.id.tvdoanhThu);
         btnDoanhThu = v.findViewById(R.id.btndoanhThu);
         edTuNgay.setOnClickListener(new View.OnClickListener() {

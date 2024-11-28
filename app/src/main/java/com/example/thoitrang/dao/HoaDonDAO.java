@@ -20,6 +20,7 @@ public class HoaDonDAO {
     }
 
     public long insert(HoaDon ob){
+
         ContentValues values = new ContentValues();
         values.put("maNV", ob.maNV);
         values.put("maKH",ob.maKH);
