@@ -73,7 +73,7 @@ public class GiayFragment extends Fragment {
         dao = new GiayDAO(getActivity());
         capNhatLv();
 
-//        tim kiem Giay theo ten Giay
+//        tim kiem Giay theo ten Giay t
         img_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

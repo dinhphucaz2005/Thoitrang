@@ -60,7 +60,7 @@ TopAdapter adapter;
 //
 //import java.util.ArrayList;
 //
-//
+///
 //    public class NhanVienFragment extends Fragment {
 //        TextInputEditText edUser, edHoTen, edPass, edRePass;
 //        Button btnSave, btnCanel;

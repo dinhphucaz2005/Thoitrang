@@ -78,6 +78,7 @@ public class DoanhThuFragment extends Fragment {
             edTuNgay.setText(sdf.format(c.getTime()));
         }
     };
+    //
     DatePickerDialog.OnDateSetListener mDateDenNgay = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {

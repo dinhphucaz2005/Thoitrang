@@ -217,7 +217,7 @@ public class HoaDonFragment extends Fragment {
                 item.maNV=maNV;
 //                item.setMaGiay(maGiay);
 //                item.setMaKH(maKhachHang);
-//                item.setMaNV(maNV);
+//                item.setMaNV(maNV);//
                 item.ngay = edNgayMua.getText().toString();
                 item.giaHD = tienMua;
                 if(chkTrangThai.isChecked()){
