@@ -65,7 +65,7 @@ public class NhanVienFragment extends Fragment {
         dao = new NhanVienDAO(getActivity());
         capNhatLv();
 
-//        tim kiem Nhan Vien theo ten dang nhap
+//        tim kiem Nhan Vien theo tt
         img_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

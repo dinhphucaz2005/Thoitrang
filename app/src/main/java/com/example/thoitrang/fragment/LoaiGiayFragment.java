@@ -50,7 +50,7 @@ public class LoaiGiayFragment extends Fragment {
         dao = new LoaiGiayDAO(getActivity());
         capNhatLv();
 
-//        tim kiem Loai Giay theo ten loai
+//        tim kiem Loai Giay theo ten loaii
         img_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
