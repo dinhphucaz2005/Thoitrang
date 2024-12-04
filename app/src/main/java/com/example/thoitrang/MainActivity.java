@@ -4,14 +4,12 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -24,13 +22,14 @@ import androidx.fragment.app.FragmentManager;
 import com.example.thoitrang.fragment.ChangePassFragment;
 import com.example.thoitrang.fragment.DoanhThuFragment;
 import com.example.thoitrang.fragment.GiayFragment;
-import com.example.thoitrang.fragment.HoaDonFragment;
+import com.example.thoitrang.fragment.HoaDonContainerFragment;
 import com.example.thoitrang.fragment.KhachHangFragment;
 import com.example.thoitrang.fragment.LoaiGiayFragment;
 import com.example.thoitrang.fragment.NhanVienFragment;
 import com.example.thoitrang.fragment.TopFragment;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
         setContentView(R.layout.activity_main);
@@ -61,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
         ab.setHomeAsUpIndicator(R.drawable.menu_tab_bar);
         ab.setDisplayHomeAsUpEnabled(true);
         FragmentManager manager = getSupportFragmentManager();
-        HoaDonFragment hoaDonFragment = new HoaDonFragment();
+        HoaDonContainerFragment hoaDonContainerFragment = new HoaDonContainerFragment();
         manager.beginTransaction()
-                .replace(R.id.flContent,hoaDonFragment)
+                .replace(R.id.flContent, hoaDonContainerFragment)
                 .commit();
 
         nv.setCheckedItem(R.id.nav_HoaDon);
@@ -172,9 +171,9 @@ public class MainActivity extends AppCompatActivity {
     private void HoaDonGE(){
         FragmentManager manager = getSupportFragmentManager();
         setTitle("Quản Lý Hóa Đơn");
-        HoaDonFragment hoaDonFragment = new HoaDonFragment();
+        HoaDonContainerFragment hoaDonContainerFragment = new HoaDonContainerFragment();
         manager.beginTransaction()
-                .replace(R.id.flContent,hoaDonFragment)
+                .replace(R.id.flContent, hoaDonContainerFragment)
                 .commit();
     }
     private void GiayGE(){
@@ -241,20 +240,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     //Out Ứng Dụng
-    boolean doubleBackToExitPressedOnce = false;
     @Override
     public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
+        super.onBackPressed();
+        FloatingActionButton floatingActionButton = findViewById(R.id.fab_HD);
+        if (floatingActionButton != null) {
+            floatingActionButton.setVisibility(View.VISIBLE);
         }
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "Click 2 Lần Để Thoát", Toast.LENGTH_SHORT).show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce=false;
-            }
-        }, 2000);
     }
 }

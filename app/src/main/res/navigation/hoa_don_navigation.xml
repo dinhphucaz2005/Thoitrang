@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/hoa_don_navigation"
+    app:startDestination="@id/hoaDonFragment">
+    <fragment
+        android:id="@+id/hoaDonFragment"
+        android:name="com.example.thoitrang.fragment.HoaDonFragment"
+        android:label="fragment_hoa_don2"
+        tools:layout="@layout/fragment_hoa_don2" >
+        <action
+            android:id="@+id/action_hoaDonFragment_to_taoHoaDonFragment"
+            app:destination="@id/taoHoaDonFragment" />
+        <action
+            android:id="@+id/action_hoaDonFragment_to_editHoaDonFragment"
+            app:destination="@id/editHoaDonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taoHoaDonFragment"
+        android:name="com.example.thoitrang.fragment.TaoHoaDonFragment"
+        android:label="fragment_tao_hoa_don"
+        tools:layout="@layout/fragment_tao_hoa_don" />
+    <fragment
+        android:id="@+id/editHoaDonFragment"
+        android:name="com.example.thoitrang.fragment.EditHoaDonFragment"
+        android:label="fragment_edit_hoa_don"
+        tools:layout="@layout/fragment_edit_hoa_don" />
+</navigation>

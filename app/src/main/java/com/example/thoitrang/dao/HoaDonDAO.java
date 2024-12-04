@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.thoitrang.database.DbHelper;
-import com.example.thoitrang.model.HoaDon;
+import com.example.thoitrang.model.ExHoaDon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class HoaDonDAO {
         db = dbHelper.getWritableDatabase();
     }
 
-    public long insert(HoaDon ob){
+    public long insert(ExHoaDon ob){
 
         ContentValues values = new ContentValues();
         values.put("maNV", ob.maNV);
@@ -31,7 +31,7 @@ public class HoaDonDAO {
         return db.insert("HoaDon",null,values);
     }
 
-    public int update(HoaDon ob){
+    public int update(ExHoaDon ob){
         ContentValues values = new ContentValues();
         values.put("maNV", ob.maNV);
         values.put("maKH",ob.maKH);
@@ -46,22 +46,22 @@ public class HoaDonDAO {
         return db.delete("HoaDon","maHD=?", new String[]{id});
     }
 
-    public List<HoaDon> getAll(){
+    public List<ExHoaDon> getAll(){
         String sql = "SELECT * FROM HoaDon";
         return getData(sql);
     }
 
-    public HoaDon getID(String id){
+    public ExHoaDon getID(String id){
         String sql = "SELECT * FROM HoaDon WHERE maHD=?";
-        List<HoaDon> list = getData(sql, id);
+        List<ExHoaDon> list = getData(sql, id);
         return list.get(0);
     }
 
-    private List<HoaDon> getData(String sql, String...selectionArgs){
-        List<HoaDon> list = new ArrayList<HoaDon>();
+    private List<ExHoaDon> getData(String sql, String...selectionArgs){
+        List<ExHoaDon> list = new ArrayList<ExHoaDon>();
         Cursor c = db.rawQuery(sql, selectionArgs);
         while (c.moveToNext()){
-            HoaDon ob = new HoaDon();
+            ExHoaDon ob = new ExHoaDon();
             ob.maHD = Integer.parseInt(c.getString(c.getColumnIndex("maHD")));
             ob.maNV = Integer.parseInt(c.getString(c.getColumnIndex("maNV")));
             ob.maKH = Integer.parseInt(c.getString(c.getColumnIndex("maKH")));

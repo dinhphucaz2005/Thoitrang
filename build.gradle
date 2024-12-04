@@ -5,16 +5,17 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-<<<<<<< HEAD
-        classpath 'com.android.tools.build:gradle:8.4.0'
-=======
-        classpath 'com.android.tools.build:gradle:8.7.2'
->>>>>>> 6b50fecf5e96d297fdcf000db4e29b3e049b8262
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+
+        classpath 'com.android.tools.build:gradle:8.4.0'
+
+                classpath 'com.android.tools.build:gradle:8.4.2'
+
+
     }
 }
+
+
 
 
 allprojects {

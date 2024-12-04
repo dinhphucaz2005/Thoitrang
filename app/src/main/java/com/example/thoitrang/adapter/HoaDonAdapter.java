@@ -1,94 +1,73 @@
 package com.example.thoitrang.adapter;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.thoitrang.R;
-import com.example.thoitrang.dao.GiayDAO;
-import com.example.thoitrang.dao.HoaDonDAO;
-import com.example.thoitrang.dao.KhachHangDAO;
-import com.example.thoitrang.fragment.HoaDonFragment;
-import com.example.thoitrang.model.Giay;
+import com.example.thoitrang.databinding.LayoutHoaDonItemBinding;
 import com.example.thoitrang.model.HoaDon;
-import com.example.thoitrang.model.KhachHang;
+import com.example.thoitrang.util.Callback;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.List;
 
-public class HoaDonAdapter extends ArrayAdapter<HoaDon> {
-    private Context context;
-    HoaDonFragment fragment;
-    private ArrayList<HoaDon> lists;
-    TextView tvMaHD, tvHDTenKH, tvHDTenGiay, tvHDGiaMua, tvHDNgayMua, tvHDTrangThai;
-    ImageView imgDeleteHD;
-    GiayDAO giayDAO;
-    HoaDonDAO hoaDonDAO;
-    KhachHangDAO khachHangDAO;
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.ViewHolder> {
 
-    public HoaDonAdapter(@NonNull Context context, HoaDonFragment fragment, ArrayList<HoaDon> lists) {
-        super(context, 0,lists);
-        this.context = context;
-        this.fragment = fragment;
-        this.lists = lists;
+    private final List<HoaDon> list;
+    private final Callback<HoaDon> callback;
+    private final Callback<HoaDon> delete;
+
+    public HoaDonAdapter(List<HoaDon> list, Callback<HoaDon> callback, Callback<HoaDon> delete) {
+        this.list = list;
+        this.callback = callback;
+        this.delete = delete;
     }
 
-    @SuppressLint("ResourceType")
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View v = convertView;
-        if(v == null){
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(R.layout.hoa_don_item,null);
-        }
-        final HoaDon item = lists.get(position);
-        if(item != null){
-            tvMaHD = v.findViewById(R.id.tvMaHD_item);
-            tvMaHD.setText("ID: "+item.maHD);
+    public HoaDonAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutHoaDonItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+    }
 
-            giayDAO = new GiayDAO(context);
-            Giay giay = giayDAO.getID(String.valueOf(item.maGiay));
-            tvHDTenGiay = v.findViewById(R.id.tvTenGiay_HD_item);
-            tvHDTenGiay.setText("Tên: "+giay.tenGiay);
-
-            khachHangDAO = new KhachHangDAO(context);
-            KhachHang khachHang = khachHangDAO.getID(String.valueOf(item.maKH));
-            tvHDTenKH = v.findViewById(R.id.tvTenKH_HD_item);
-            tvHDTenKH.setText("Khách hàng: "+khachHang.tenKH);
-
-            tvHDGiaMua = v.findViewById(R.id.tvGiaMua_HD_item);
-            tvHDGiaMua.setText("Giá: "+item.giaHD);
-
-            tvHDNgayMua = v.findViewById(R.id.tvNgayMua_HD_item);
-            tvHDNgayMua.setText("Date: "+item.ngay);
-
-            tvHDTrangThai = v.findViewById(R.id.tvTrangThai_HD_item);
-            if(item.trangThai == 1){
-                tvHDTrangThai.setTextColor(Color.GREEN);
-                tvHDTrangThai.setText("Đã thanh toán");
-            }else{
-                tvHDTrangThai.setTextColor(Color.RED);
-                tvHDTrangThai.setText("Chưa thanh toán");
-            }
-            imgDeleteHD = v.findViewById(R.id.img_delete_HD);
-        }
-        imgDeleteHD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fragment.xoaHoaDon(String.valueOf(item.maHD));
-            }
+    @Override
+    public void onBindViewHolder(@NonNull HoaDonAdapter.ViewHolder holder, int position) {
+        HoaDon hoaDon = list.get(position);
+        holder.binding.tvMaHoaDon.setText("Mã hoá đơn: " + hoaDon.getMaHD());
+        holder.binding.tvTenKhachHang.setText("Tên khách hàng: " + hoaDon.getTenKH());
+        holder.binding.tvTrangThaiHoaDon.setText("Trạng thái: " + hoaDon.getTrangThaiString());
+        holder.binding.tvGia.setText("Tổng: " + hoaDon.getGiaHD() + " VNĐ");
+        holder.binding.tvNgayMua.setText(hoaDon.getNgay());
+        holder.binding.getRoot().setOnLongClickListener(v -> {
+            callback.onComplete(hoaDon);
+            return true;
         });
-        return v;
+        holder.binding.btnDeleteHoaDon.setOnClickListener(v -> {
+            notifyItemRemoved(position);
+            list.remove(hoaDon);
+            delete.onComplete(hoaDon);
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void setHoaDonList(List<HoaDon> allHoaDon) {
+        this.list.clear();
+        this.list.addAll(allHoaDon);
+        notifyDataSetChanged();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public final LayoutHoaDonItemBinding binding;
+
+        public ViewHolder(LayoutHoaDonItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
     }
 }
